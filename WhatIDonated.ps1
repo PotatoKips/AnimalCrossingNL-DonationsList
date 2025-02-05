@@ -90,6 +90,7 @@ if(Test-Path $list){
           }
       }
     }
+    
     elseif( $i -Match '99'){ # Reset the list
       Write-Host "Are you sure you want to RESET your list? For yes, write (Yes, Reset the list); anything else means no: " -NoNewline
       $i = Read-Host
@@ -110,6 +111,7 @@ if(Test-Path $list){
         Write-Host "The list haven't been reseted: " -NoNewline -ForegroundColor Green; $i = Read-Host
       }
     }
+
     else{ # Loop Breaker
         write-host "Quit ? (Y/N)"
         $i = read-host
