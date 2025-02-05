@@ -31,9 +31,12 @@ if(Test-Path $list){
       Write-Host "1-" $CAT[0]"." -ForegroundColor Blue
       Write-Host "2-" $CAT[1]"." -ForegroundColor DarkBlue
       Write-Host "3-" $CAT[2]"." -ForegroundColor Green
-  <#for ($s= 1; $s -ne 4; $s++){ # Use if want to make your own script
-        Write-Host $s"-" $CAT[$s - 1]"." -ForegroundColor DarkRed
-    }#>
+      Write-Host "99- RESETti?" -ForegroundColor Red
+  <#  $s = 1
+      foreach ($EachCAT in $CAT){ # Use if want to make your own script
+           Write-Host $s"-" $EachCAT[$s - 1]"." -ForegroundColor DarkRed
+           $s++
+      }#>
     Write-Host "Write the number to the list you want to load (anything else to quit): " -NoNewline; $i = Read-Host
     #list loop 'v'
     if ($i -match '[1-3]'){
@@ -51,8 +54,7 @@ if(Test-Path $list){
             write-host $key".    " -NoNewline -ForegroundColor Green
             $l++
           }
-          elseif($Value -ne 0) {} # Output only NOT donated collectable if 'N'
-          else{
+          elseif($Value -eq 0) {
             write-host $key".    " -NoNewline -ForegroundColor Red
             $l++
           }
@@ -86,6 +88,26 @@ if(Test-Path $list){
           else{
               break
           }
+      }
+    }
+    elseif( $i -Match '99'){ # Reset the list
+      Write-Host "Are you sure you want to RESET your list? For yes, write (Yes, Reset the list); anything else means no: " -NoNewline
+      $i = Read-Host
+      if ( $i -match 'Yes, Reset the list'){
+        $CurrentLine = 0
+        foreach ($line in $RawList){
+          if ($line -match '(.+)=1'){
+          $RawList[$CurrentLine] = $Matches.1 + "=0"
+          $RawList | Set-Content $list
+          }
+          $CurrentLine++
+        }
+      } # After finishing
+      if ( $i -match 'Yes, Reset the list'){
+        Write-Host "The list have been reseted: " -NoNewline -ForegroundColor DarkRed; $i = Read-Host
+      }
+      else {
+        Write-Host "The list haven't been reseted: " -NoNewline -ForegroundColor Green; $i = Read-Host
       }
     }
     else{ # Loop Breaker
