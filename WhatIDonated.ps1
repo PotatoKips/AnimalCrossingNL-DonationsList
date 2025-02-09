@@ -5,12 +5,12 @@ if(Test-Path $list){
     # Declaring variables
     $RawList = Get-Content $list
     [string[]]$CAT = @(); [Int16[]]$CAT_lineNum = @(0) #CAT=CollectableType
-    $i = 0
+    $i = 0 #Wild card
 
     # Attaching values to variable(s)
     foreach ($line in $RawList){
         $line = $line.Trim()
-        if ($line -match "-(.+):$"){
+        if ($line -match '-(.+):'){ # no working a-z
             $CAT += $matches.1
             $i++
             $CAT_lineNum += $CAT_lineNum[$i - 1]
@@ -28,9 +28,9 @@ if(Test-Path $list){
       clear
       Write-Host "This SCRIPT has been written by 'PotatoKips'" -ForegroundColor Cyan
       write-host "--------------------------------------------"
-      Write-Host "1-" $CAT[0]"." -ForegroundColor Blue
-      Write-Host "2-" $CAT[1]"." -ForegroundColor DarkBlue
-      Write-Host "3-" $CAT[2]"." -ForegroundColor Green
+      Write-Host "1-"$CAT[0]"." -ForegroundColor Blue
+      Write-Host "2-"$CAT[1]"." -ForegroundColor DarkBlue
+      Write-Host "3-"$CAT[2]"." -ForegroundColor Green
       Write-Host "99- RESETti?" -ForegroundColor Red
   <#  $s = 1
       foreach ($EachCAT in $CAT){ # Use if want to make your own script
@@ -47,7 +47,7 @@ if(Test-Path $list){
       foreach($SpecItemS in $RawList[$CAT_lineNum[$i - 1]..($CAT_lineNum[$i])]){
         if($CAT_lineNum[$i - 1] -eq $CAT_lineNum[$i]){ break }
         elseif($l -eq 4){ write-host ""; $l = 0 } #Not related 'else(if)', but it won't execute if 'if' does anyway.
-        if($SpecItemS -match '(.+)=(.+)'){
+        if($SpecItemS -match '(.+)=(\d)'){
           $key = $Matches[1].Trim(); $Value = $Matches[2].Trim()
 
           if($Temp_YN -match 'Y' -and $Value -ne 0){
@@ -92,7 +92,7 @@ if(Test-Path $list){
     }
     
     elseif( $i -Match '99'){ # Reset the list
-      Write-Host "Are you sure you want to RESET your list? For yes, write (Yes, Reset the list); anything else means no: " -NoNewline
+      Write-Host "Are you sure you want to RESET your list? if so, write (Yes, Reset the list); anything else means no: " -NoNewline
       $i = Read-Host
       if ( $i -match 'Yes, Reset the list'){
         $CurrentLine = 0
