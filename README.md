@@ -10,7 +10,7 @@ but still not sure if you donated it or not.
 - Have you ever left a save file for a long time, for months, years even, and __god forbid__ you sold everything for bells,
 and didn't bother to donate at that time.
 
-Let me tell; I have the ~solu-~ script, I have a script to store what you did and didn't donate.
+Let me tell you; I have the ~solu-~ script, I have a script to store what you did and didn't donate.
 
 ---
 
@@ -30,7 +30,7 @@ On starting the script [( start-process powershell C:\Path\To\script.ps1 ) -or (
 ![Capture1](https://github.com/user-attachments/assets/10ea84d5-1bd7-42cf-b762-ae15d0c8bc69)
 
 1. Choose the list you want to load.
-2. Have the list printed with not donated items with\or without donated items.
+2. Have the list printed with\or without donated items.
 
 ![Capture2](https://github.com/user-attachments/assets/60c5373b-6aed-4de3-8bb0-41a415b62b29)
 
